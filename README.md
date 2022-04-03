@@ -8,20 +8,23 @@
 
   | Role | Purpose | 
   | --- | --- | 
-  | Storage Object Creator | To create and update remote statefile. |
+  | Storage Object Admin | To create and update remote statefile - object creator is enough to create a statefile but isn't sufficient to obtain the terraform lockfile, changing to object admin resolves the issue. |
   | Roles Administrator | To create other IAM Roles | 
   | Storage Object Viewer | Needed only if you need to run `terraform init -migrate-state`. |
+  | Storage Admin | To create storage buckets. |
+  | BigQuery User | To create datasets. |
 - Per project: Enable the necessary APIs in the console [^4]
   - Identity and Access Management (IAM) API
   - Cloud Storage API
-
 
 ### Setting up CICD Permissions and Workflows
 - Create a new job in each CICD workflow .yml in the `.github/workflows` directory specific to the new environment 
 - Via the service accounts section of the GCP IAM console, create a new JSON key on the `terraform` service account in your environment and download it. Add the key to the GitHub repository secrets for use in CICD (e.g. name it GCLOUD_KEY_DEV in the secrets and refer to it as that in actions pipelines)
 - Run the Infra CICD pipeline to provision the infrastructure.
 
-### Terraforming locally 
+
+### Terraforming Locally
+
 Navigate to the 'service accounts' section of the GCP IAM console. Create a new JSON key for the `terraform` service account and download the JSON key to your local machine from GCP.
 
 Set the credentials: set the path to the key by setting the CLI GOOGLE_APPLICATION_CREDENTIALS variable with the path to the json key file on your machine. This enables you to run the terraform the same way the GitHub Actions workflow would, from your command line. 
@@ -38,3 +41,5 @@ terraform init # initialize the necessary providers and remote state
 terraform plan # to view planned changes and verify they are as expected, without applying them 
 terraform apply # to execute changes 
 ```
+
+[^1]: In the future, this should be scripted; time did not allow in the scope of this project.
