@@ -1,0 +1,33 @@
+{
+    "BigQuery Schema":[
+       {
+          "name":"tweet_id",
+          "type":"STRING"
+       },
+       {
+          "name":"author_id",
+          "type":"STRING",
+          "mode": "NULLABLE"
+       },
+       {
+          "name":"inbound",
+          "type":"BOOL",
+          "mode": "NULLABLE"
+       },
+       {
+          "name":"created_at",
+          "type":"STRING",
+          "mode": "NULLABLE"
+       },
+       {
+          "name":"response_tweet_id",
+          "type":"STRING",
+          "mode": "NULLABLE"
+       },
+       {
+          "name":"in_response_to_tweet_id",
+          "type":"STRING",
+          "mode": "NULLABLE"
+       }
+    ]
+ }

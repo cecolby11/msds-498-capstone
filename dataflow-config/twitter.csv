@@ -1,0 +1,7 @@
+tweet_id,INTEGER
+author_id,STRING
+inbound,BOOL
+created_at,DATETIME
+text,STRING
+response_tweet_id,INTEGER
+in_response_to_tweet_id,INTEGER

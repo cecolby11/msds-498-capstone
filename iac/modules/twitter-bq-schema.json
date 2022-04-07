@@ -1,7 +1,7 @@
 [
    {
       "name":"tweet_id",
-      "type":"INTEGER"
+      "type":"STRING"
    },
    {
       "name":"author_id",
@@ -15,17 +15,22 @@
    },
    {
       "name":"created_at",
-      "type":"TIMESTAMP",
+      "type":"STRING",
+      "mode": "NULLABLE"
+   },
+   {
+      "name":"text",
+      "type":"STRING",
       "mode": "NULLABLE"
    },
    {
       "name":"response_tweet_id",
-      "type":"INTEGER",
+      "type":"STRING",
       "mode": "NULLABLE"
    },
    {
       "name":"in_response_to_tweet_id",
-      "type":"INTEGER",
+      "type":"STRING",
       "mode": "NULLABLE"
    }
 ]
