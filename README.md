@@ -16,7 +16,9 @@
 - Per project: Enable the necessary APIs in the console [^4]
   - Identity and Access Management (IAM) API
   - Cloud Storage API
-  - Data Flow API 
+  - Dataflow API (to create Dataflow Jobs)
+  - Data Pipelines API (to create a Dataflow Data Pipeline)
+  - Cloud Scheduler API (to create a Dataflow Data Pipeline)
 
 ### Setting up CICD Permissions and Workflows
 - Create a new job in each CICD workflow .yml in the `.github/workflows` directory specific to the new environment 
