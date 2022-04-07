@@ -13,12 +13,14 @@
   | Storage Object Viewer | Needed only if you need to run `terraform init -migrate-state`. |
   | Storage Admin | To create storage buckets. |
   | BigQuery User | To create datasets. |
+  | PubSub Admin | To manage pub sub topics and subscriptions. |
 - Per project: Enable the necessary APIs in the console [^4]
   - Identity and Access Management (IAM) API
   - Cloud Storage API
   - Dataflow API (to create Dataflow Jobs)
   - Data Pipelines API (to create a Dataflow Data Pipeline)
   - Cloud Scheduler API (to create a Dataflow Data Pipeline)
+  - PubSub API
 
 ### Setting up CICD Permissions and Workflows
 - Create a new job in each CICD workflow .yml in the `.github/workflows` directory specific to the new environment 
