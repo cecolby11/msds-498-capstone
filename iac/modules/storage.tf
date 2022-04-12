@@ -18,3 +18,12 @@ resource "google_storage_bucket" "dataflow_functions" {
 
     labels = local.labels
 }
+
+resource "google_storage_bucket" "cf_deployment_code" {
+  name = "${var.app_name}-cloud-function-code-${var.project_id}-${var.env}" # ensure globally unique
+  location      = "US"
+  force_destroy = true
+  uniform_bucket_level_access = true
+
+  labels = local.labels
+}

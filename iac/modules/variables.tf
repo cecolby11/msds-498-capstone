@@ -8,3 +8,8 @@ variable "project_zone" {
 }
 variable "app_name" {}
 variable "env" {}
+
+# Cloud Function 
+variable "cf_producer_source_dir" {}
+variable "cf_dist_output_dir" {}
+variable "cf_producer_invoke_schedule" {}
