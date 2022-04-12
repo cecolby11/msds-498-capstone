@@ -14,6 +14,11 @@
   | Storage Admin | To create storage buckets. |
   | BigQuery User | To create datasets. |
   | PubSub Admin | To manage pub sub topics and subscriptions. |
+  | Cloud Functions Admin | To manage cloud functions. |
+  | Cloud Scheduler Admin | To manage cloud scheduler jobs. |
+  | Service Account Admin | To create and manage service accounts. |
+  | Security Admin | To set the service account on the cloud function |
+  | Service Account User | To act as the service account to set the service account on the cloud function |
 - Per project: Enable the necessary APIs in the console [^4]
   - Identity and Access Management (IAM) API
   - Cloud Storage API
@@ -21,6 +26,9 @@
   - Data Pipelines API (to create a Dataflow Data Pipeline)
   - Cloud Scheduler API (to create a Dataflow Data Pipeline)
   - PubSub API
+  - Cloud Functions API
+  - Cloud Scheduler API
+  - Cloud Build API (so terraform can tell whether the cloud function has completed provisioning)
 
 ### Setting up CICD Permissions and Workflows
 - Create a new job in each CICD workflow .yml in the `.github/workflows` directory specific to the new environment 
