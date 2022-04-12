@@ -20,6 +20,11 @@
           "mode": "NULLABLE"
        },
        {
+        "name":"text",
+        "type":"STRING",
+        "mode": "NULLABLE"
+     },
+       {
           "name":"response_tweet_id",
           "type":"STRING",
           "mode": "NULLABLE"
