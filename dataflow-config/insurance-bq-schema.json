@@ -1,0 +1,39 @@
+{
+   "BigQuery Schema":[
+      {
+         "name":"age",
+         "type":"INTEGER",
+         "mode": "NULLABLE"
+      },
+      {
+         "name":"sex",
+         "type":"STRING",
+         "mode": "NULLABLE"
+      },
+      {
+         "name":"bmi",
+         "type":"FLOAT64",
+         "mode": "NULLABLE"
+      },
+      {
+         "name":"children",
+         "type":"INTEGER",
+         "mode": "NULLABLE"
+      },
+      {
+         "name":"smoker",
+         "type":"BOOL",
+         "mode": "NULLABLE"
+      },
+      {
+         "name":"region",
+         "type":"STRING",
+         "mode": "NULLABLE"
+      },
+      {
+         "name":"charges",
+         "type":"DECIMAL",
+         "mode": "NULLABLE"
+      }
+   ]
+}

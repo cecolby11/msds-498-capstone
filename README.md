@@ -1,5 +1,7 @@
 # msds-498-capstone
 
+The open dataset I am working with is `Medical Cost Personal Datasets` available on Kaggle: https://www.kaggle.com/datasets/mirichoi0218/insurance  
+
 ## Setting up a new environment in GCP[^1]
 - Within the `iac` directory, duplicate an existing terraform environment directory and rename it for your environment. 
 - Create a new project in the GCP console for the new environment. Add the project ID to the `iac/{env}/variables.tf` in the `iac/{env}` directory. [^2]

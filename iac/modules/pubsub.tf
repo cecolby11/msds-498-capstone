@@ -6,6 +6,7 @@ resource "google_pubsub_topic" "example" {
   message_retention_duration = "600s" # 10 minutes
 }
 
+# # so I can see what messages show up
 # resource "google_pubsub_subscription" "example" {
 #   name  = "example-subscription"
 #   topic = google_pubsub_topic.example.name
