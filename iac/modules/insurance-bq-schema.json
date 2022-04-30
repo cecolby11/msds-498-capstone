@@ -11,7 +11,7 @@
    },
    {
       "name":"bmi",
-      "type":"FLOAT64",
+      "type":"FLOAT",
       "mode": "NULLABLE"
    },
    {
@@ -21,7 +21,7 @@
    },
    {
       "name":"smoker",
-      "type":"BOOL",
+      "type":"BOOLEAN",
       "mode": "NULLABLE"
    },
    {
@@ -31,7 +31,7 @@
    },
    {
       "name":"charges",
-      "type":"DECIMAL",
+      "type":"NUMERIC",
       "mode": "NULLABLE"
    }
 ]

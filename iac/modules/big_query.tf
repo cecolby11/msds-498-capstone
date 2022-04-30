@@ -26,7 +26,7 @@ resource "google_bigquery_table" "insurance" {
   labels = local.labels
   # NOTE: : On newer versions of the provider, you must explicitly set deletion_protection=false (and run terraform apply to write the field to state) in order to destroy an instance. 
   # It is recommended to not set this field (or set it to true) until you're ready to destroy.
-  deletion_protection = false // # @TODO: flip this to true once I have the infra how I want it 
+  deletion_protection = true // # @TODO: flip this to true once I have the infra how I want it 
 
   schema = file("${path.module}/insurance-bq-schema.json")
 }

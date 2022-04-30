@@ -21,6 +21,7 @@ The open dataset I am working with is `Medical Cost Personal Datasets` available
   | Service Account Admin | To create and manage service accounts. |
   | Security Admin | To set the service account on the cloud function |
   | Service Account User | To act as the service account to set the service account on the cloud function |
+  | AI Platform Admin | To create new AI Platform model resource | 
 - Per project: Enable the necessary APIs in the console [^4]
   - Identity and Access Management (IAM) API
   - Cloud Storage API
@@ -31,6 +32,7 @@ The open dataset I am working with is `Medical Cost Personal Datasets` available
   - Cloud Functions API
   - Cloud Scheduler API
   - Cloud Build API (so terraform can tell whether the cloud function has completed provisioning)
+  - AI Platform Models API 
 
 ### Setting up CICD Permissions and Workflows
 - Create a new job in each CICD workflow .yml in the `.github/workflows` directory specific to the new environment 

@@ -27,3 +27,12 @@ resource "google_storage_bucket" "cf_deployment_code" {
 
   labels = local.labels
 }
+
+resource "google_storage_bucket" "bq_model_export" {
+  name = "${var.app_name}-bq-model-export-${var.project_id}-${var.env}" # ensure globally unique
+  location      = "US"
+  force_destroy = true
+  uniform_bucket_level_access = true
+
+  labels = local.labels
+}
