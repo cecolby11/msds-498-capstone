@@ -10,6 +10,7 @@ The open dataset I am working with is `Medical Cost Personal Datasets` available
 
   | Role | Purpose | 
   | --- | --- | 
+  | Project Owner [^3] | To provision a new App Engine application. |
   | Storage Object Admin | To create and update remote statefile - object creator is enough to create a statefile but isn't sufficient to obtain the terraform lockfile, changing to object admin resolves the issue. |
   | Roles Administrator | To create other IAM Roles | 
   | Storage Object Viewer | Needed only if you need to run `terraform init -migrate-state`. |
@@ -33,6 +34,7 @@ The open dataset I am working with is `Medical Cost Personal Datasets` available
   - Cloud Scheduler API
   - Cloud Build API (so terraform can tell whether the cloud function has completed provisioning)
   - AI Platform Models API 
+  - App Engine Admin API
 
 ### Setting up CICD Permissions and Workflows
 - Create a new job in each CICD workflow .yml in the `.github/workflows` directory specific to the new environment 

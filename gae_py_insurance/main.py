@@ -7,7 +7,7 @@ app = flask.Flask(__name__)
 @app.get("/")
 def hello():
     """Return a friendly HTTP greeting."""
-    return "Hello World!\n"
+    return "Welcome to the Insurance Cost Prediction Tool!\n"
 
 @app.get('/predict/create')
 def serve_predict_form():
@@ -45,10 +45,3 @@ if __name__ == "__main__":
     # Engine, a webserver process such as Gunicorn will serve the app. This
     # can be configured by adding an `entrypoint` to app.yaml.
     app.run(host="localhost", port=8080, debug=True)
-
-# instances = [
-#         {"sex": "female", "age": 26, "smoker": False, "bmi":  27.315, "children": 0, "region": "northeast"},
-#         {"sex": "male", "age": 55, "smoker": True, "bmi":  39.315, "children": 2, "region": "northeast"}
-#     ]
-
-# predict_json('dev-346101', 'simple_insurance', instances, 'console_test')
