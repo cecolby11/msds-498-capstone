@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy GAE Default
+name: Deploy GAE Insurance (Default Service)
 
 # Controls when the workflow will run
 on:

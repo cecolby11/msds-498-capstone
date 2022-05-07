@@ -7,4 +7,10 @@ resource "google_ml_engine_model" "default" {
 
   online_prediction_logging         = false
   online_prediction_console_logging = false
+
+  lifecycle {
+    ignore_changes = [
+      default_version
+    ]
+  }
 }
