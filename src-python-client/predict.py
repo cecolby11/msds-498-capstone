@@ -5,7 +5,6 @@ import googleapiclient.discovery
 
 service = googleapiclient.discovery.build('ml', 'v1')
 
-
 def predict_json(project, model, instances, version=None):
     """Send json data to a deployed model for prediction.
 
@@ -26,6 +25,7 @@ def predict_json(project, model, instances, version=None):
     if version is not None:
         name += '/versions/{}'.format(version)
 
+    print(instances)
     response = service.projects().predict(
         name=name,
         body={'instances': instances}
@@ -39,9 +39,9 @@ def predict_json(project, model, instances, version=None):
     return response['predictions']
 
 
-instances = [
-        {"sex": "female", "age": 26, "smoker": False, "bmi":  27.315, "children": 0, "region": "northeast"},
-        {"sex": "male", "age": 55, "smoker": True, "bmi":  39.315, "children": 2, "region": "northeast"}
-    ]
+# instances = [
+#         {"sex": "female", "age": 26, "smoker": False, "bmi":  27.315, "children": 0, "region": "northeast"},
+#         {"sex": "male", "age": 55, "smoker": True, "bmi":  39.315, "children": 2, "region": "northeast"}
+#     ]
 
-predict_json('dev-346101', 'simple_insurance', instances, 'console_test')
+# predict_json('dev-346101', 'simple_insurance', instances, 'console_test')

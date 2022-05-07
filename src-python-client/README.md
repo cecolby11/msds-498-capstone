@@ -6,7 +6,10 @@ python -m venv venv
 source venv/bin/activate
 pip3 install google-api-python-client
 ...
+pip3 freeze > requirements.txt
+...
 deactivate
+...
 ```
 I had some issues of the python on my mac vs my venv version, because I did pip install of the google-api-python-client and then got `'googleapiclient' is not defined` type errors when running my script. so check which version of python is where:
 ```bash
