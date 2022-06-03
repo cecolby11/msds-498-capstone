@@ -1,10 +1,26 @@
 # msds-498-capstone
 
+![Infra Actions Status](https://github.com/cecolby11/msds-498-capstone/actions/workflows/build_infra.yml/badge.svg)
+![Hello World API Actions Status](https://github.com/cecolby11/msds-498-capstone/actions/workflows/deploy_gae_insurance.yml/badge.svg)
+
 ## Project Overview
+
+This project predicts medical charges from personal data such as age, smoker status, bmi, etc. using linear regression. 
+
+This could be useful for healthcare companies to forecast costs and assess premiums, or to provide patients greater insight into the most important factors influencing their charges and into their potential charges when planning HSA contributions. 
 
 ### Architecture
 
+The project is hosted in Google Cloud. The main features are: 
+- A "Producer" Cloud Function consumes data updates and publishes them to cloud storage or a pubsub topic 
+- BigQuery tables serve as the "Data Warehouse" 
+- Batch ETL: A Dataflow job consumes data from Cloud Storage Bucket, transforms it, and loads it to BigQuery warehouse
+- Streaming ETL: A Dataflow job consumes data from PubSub Topic, transforms it, and loads it to BigQuery warehouse
+- BigQuery ML queries create a linear regression model to predict insurance charges from the data. Additional BigQuery ML queries generate batch predictions from the model and save to BigQuery. 
+- The resulting BigQuery Model is exported to cloud storage in Tensorflow SavedModel format. An AI Platform Prediction model is created from the exported model for online prediction. 
+- A Python app deployed to Google App Engine hosts a simple UI and calls the AI Platform model to consume online predictions.
 
+![Architecture Diagram](./MSDS-498-architecture.png?raw=true "Architecture Diagram")
 
 ### Directory Structure
 ```
@@ -29,6 +45,17 @@ src_producer_Fxn/             # Node.js application code for the "Producer" Clou
 
 ### Data
 The open dataset I am working with is `Medical Cost Personal Datasets` available on Kaggle: https://www.kaggle.com/datasets/mirichoi0218/insurance  
+
+### Deployment
+Deploying to Google Cloud is automated with GitHub Actions. 
+
+There are two workflows defined in GitHub Actions: 
+- One to provision the GCP infrastructure from the terraform IaC files. This pipeline runs when changes are made to the IaC directory or the ETL source code directories.
+- One to deploy the application code for the python UI for consuming online predictions to Google App Engine. This pipeline runs when changes are made to the gae_py_insurance directory.
+
+The project currently has one environment: dev. The dev environment is deployed when changes are pushed to the `dev` branch in GitHub. The deployment pipelines are already configured to deploy a prod environment when changes are pushed to a `main` branch in GitHub once a prod GCP project is set up and a `prod` IAC directory configured. 
+
+You can also manually deploy any of the workflows from the 'Actions' tab in the GitHub repository. 
 
 ## Setting up a new environment in GCP[^1]
 - Within the `iac` directory, duplicate an existing terraform environment directory and rename it for your environment. 
@@ -69,7 +96,6 @@ The open dataset I am working with is `Medical Cost Personal Datasets` available
 - Via the service accounts section of the GCP IAM console, create a new JSON key on the `terraform` service account in your environment and download it. Add the key to the GitHub repository secrets for use in CICD (e.g. name it GCLOUD_KEY_DEV in the secrets and refer to it as that in actions pipelines)
 - Run the Infra CICD pipeline to provision the infrastructure.
 
-
 ### Terraforming Locally
 Navigate to the 'service accounts' section of the GCP IAM console. Create a new JSON key for the `terraform` service account and download the JSON key to your local machine from GCP.
 
@@ -97,4 +123,31 @@ Setup of one section of the app has yet to be scripted due to time constraints:
 - Once you have run them BigQuery ML queries to create a model and test it out for batch predictions, use the console to export it to a cloud storage bucket. 
 - In the AI Platform service, create a new Model Version of the terraformed model, pointing to the exported model in cloud storage (currently the python app expects it to be named `console_test`, but this should be parameterized eventually once more of this section is scripted out). 
 
-### Google App Engine App
+### Running the Flask Prediction App locally 
+
+This project includes a python app for obtaining online predictions from AI Platform. Running this app locally is a great starting point if you are new to API development, CICD, or Google App Engine.
+
+Follow the documentation to install the Google Cloud SDK if you haven't already, to set up the gcloud command-line tool: https://cloud.google.com/sdk
+
+Navigate to the 'service accounts' section of the GCP IAM console. Create a new JSON key and download the `App Engine default service account` JSON key to your local machine from GCP. Google App Engine uses a default service account named <PROJECT_ID>@appspot.gserviceaccount.com. 
+
+Set the credentials: set the path to the key by setting the CLI GOOGLE_APPLICATION_CREDENTIALS variable with the path to the json key file on your machine. This enables you to run the code the same way Google App Engine would, from your command line. 
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/json/key/file" 
+```
+
+navigate to the `gae_py_insurance` directory and install dependencies
+```bash
+# Python comes installed with the venv module 
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the Flask API 
+```bash
+cd gae_py_insurance
+python main.py
+```
+
+Visit localhost:8080 in your browser.
