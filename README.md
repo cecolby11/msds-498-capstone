@@ -1,5 +1,33 @@
 # msds-498-capstone
 
+## Project Overview
+
+### Architecture
+
+
+
+### Directory Structure
+```
+gae_py_insurance              # App Code for consuming AI Platform online predictions (Python/Flask, deployed to GAE).
+│   main.py                   # App entry point, Flask app definition - GAE python runtime expects this to be named main
+│   predict.py                # AI Platform library implementation and business logic for the prediction
+│   templates/                # HTML dynamic templates served by Flask routes for simple UI 
+│   requirements.txt          # Lists dependencies required for the production python application
+│   app.yaml                  # Configuration for web service deployment to App Engine
+└───.gcloudignore             # Lists files in the enclosing directory that should not be deployed to App Engine 
+.github/workflows/            # GitHub Actions configuration files for CICD
+│   build_infra_dev.yaml      # GHA workflow configuration to build application infrastructure (Terraform IaC files)
+└───deploy_gae_insurance.yaml # GHA workflow configuration to deploy Python app to GAE
+iac/                          # Terraform Infrastructure-as-Code configuration files
+│   <env>/                    # Per-environment Terraform variables, outputs, and state configuration
+└───modules/                  # Terraform modules, used by all environments
+src_producer_Fxn/             # Node.js application code for the "Producer" Cloud Function to Ingest data into GCP from an endpoint and publish it to cloud storage or pubsub topic. 
+.gitignore                    # Lists files that should not be tracked in source control
+.terraform-version            # Configures terraform version for tfenv utility to install
+.editorconfig                 # Configuration for code editors
+```
+
+### Data
 The open dataset I am working with is `Medical Cost Personal Datasets` available on Kaggle: https://www.kaggle.com/datasets/mirichoi0218/insurance  
 
 ## Setting up a new environment in GCP[^1]
@@ -43,7 +71,6 @@ The open dataset I am working with is `Medical Cost Personal Datasets` available
 
 
 ### Terraforming Locally
-
 Navigate to the 'service accounts' section of the GCP IAM console. Create a new JSON key for the `terraform` service account and download the JSON key to your local machine from GCP.
 
 Set the credentials: set the path to the key by setting the CLI GOOGLE_APPLICATION_CREDENTIALS variable with the path to the json key file on your machine. This enables you to run the terraform the same way the GitHub Actions workflow would, from your command line. 
@@ -63,4 +90,11 @@ terraform apply # to execute changes
 
 [^1]: In the future, this should be scripted; time did not allow in the scope of this project.
 
-### Creating the Google App Engine App 
+## Additional Setup in GCP 
+### BigQuery ML Modeling and Export to AI Platform
+Setup of one section of the app has yet to be scripted due to time constraints: 
+- The BigQuery ML commands are located in the `bq_ml_queries` directory. These can be executed via the console once you have terraformed everything. 
+- Once you have run them BigQuery ML queries to create a model and test it out for batch predictions, use the console to export it to a cloud storage bucket. 
+- In the AI Platform service, create a new Model Version of the terraformed model, pointing to the exported model in cloud storage (currently the python app expects it to be named `console_test`, but this should be parameterized eventually once more of this section is scripted out). 
+
+### Google App Engine App

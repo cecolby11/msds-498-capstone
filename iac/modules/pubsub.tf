@@ -7,11 +7,11 @@ resource "google_pubsub_topic" "example" {
 }
 
 # # so I can see what messages show up
-# resource "google_pubsub_subscription" "example" {
-#   name  = "example-subscription"
-#   topic = google_pubsub_topic.example.name
+resource "google_pubsub_subscription" "example" {
+  name  = "example-subscription"
+  topic = google_pubsub_topic.example.name
 
-#   ack_deadline_seconds = 30
+  ack_deadline_seconds = 30
 
-#   labels = local.labels
-# }
+  labels = local.labels
+}

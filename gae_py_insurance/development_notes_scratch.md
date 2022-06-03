@@ -1,3 +1,6 @@
+## Development Notes
+
+Helpful Resource: 
 https://cloud.google.com/ai-platform/prediction/docs/online-predict
 
 
