@@ -15,7 +15,7 @@ The project is hosted in Google Cloud. The main features are:
 - A "Producer" Cloud Function consumes data updates and publishes them to cloud storage or a pubsub topic 
 - BigQuery tables serve as the "Data Warehouse" 
 - Batch ETL: A Dataflow job consumes data from Cloud Storage Bucket, transforms it, and loads it to BigQuery warehouse
-- Streaming ETL: A Dataflow job consumes data from PubSub Topic, transforms it, and loads it to BigQuery warehouse
+- Streaming ETL: A Dataflow job consumes data from PubSub subscription, transforms it, and loads it to BigQuery warehouse
 - BigQuery ML queries create a linear regression model to predict insurance charges from the data. Additional BigQuery ML queries generate batch predictions from the model and save to BigQuery. 
 - The resulting BigQuery Model is exported to cloud storage in Tensorflow SavedModel format. An AI Platform Prediction model is created from the exported model for online prediction. 
 - A Python app deployed to Google App Engine hosts a simple UI and calls the AI Platform model to consume online predictions.
