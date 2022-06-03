@@ -20,6 +20,8 @@ The project is hosted in Google Cloud. The main features are:
 - The resulting BigQuery Model is exported to cloud storage in Tensorflow SavedModel format. An AI Platform Prediction model is created from the exported model for online prediction. 
 - A Python app deployed to Google App Engine hosts a simple UI and calls the AI Platform model to consume online predictions.
 
+For the Dataflow ETLs, initially google-provided templates were used and the jobs were configured via the GCP console. I also experimented with creating my own flex template for the streaming job and running it via the CLI. See the `streaming_beam` directory and its README for the commands for this. 
+
 ![Architecture Diagram](./MSDS-498-architecture.png?raw=true "Architecture Diagram")
 
 ### Directory Structure
@@ -38,6 +40,7 @@ iac/                          # Terraform Infrastructure-as-Code configuration f
 │   <env>/                    # Per-environment Terraform variables, outputs, and state configuration
 └───modules/                  # Terraform modules, used by all environments
 src_producer_Fxn/             # Node.js application code for the "Producer" Cloud Function to Ingest data into GCP from an endpoint and publish it to cloud storage or pubsub topic. 
+streaming_beam/               # Experimental code for creating a Dataflow flex template for a Streaming pipeline
 .gitignore                    # Lists files that should not be tracked in source control
 .terraform-version            # Configures terraform version for tfenv utility to install
 .editorconfig                 # Configuration for code editors
@@ -118,7 +121,8 @@ terraform apply # to execute changes
 
 ## Additional Setup in GCP 
 ### BigQuery ML Modeling and Export to AI Platform
-Setup of one section of the app has yet to be scripted due to time constraints: 
+Setup of some section of the app have yet to be scripted due to time constraints in the course: 
+- For the Dataflow ETLs, initially google-provided templates are being used and the jobs are configured via the GCP console.
 - The BigQuery ML commands are located in the `bq_ml_queries` directory. These can be executed via the console once you have terraformed everything. 
 - Once you have run them BigQuery ML queries to create a model and test it out for batch predictions, use the console to export it to a cloud storage bucket. 
 - In the AI Platform service, create a new Model Version of the terraformed model, pointing to the exported model in cloud storage (currently the python app expects it to be named `console_test`, but this should be parameterized eventually once more of this section is scripted out). 

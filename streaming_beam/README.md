@@ -1,13 +1,3 @@
-# Week 9
-
-## Project Recap & Week 9 Updates
-### Previous weeks:
-- Loaded data from Cloud Storage Bucket to BigQuery with Dataflow job
-- Created a model with BigQuery ML to predict insurance charges 
-- Created AI Platform Prediction model from exported model for online prediction 
-- Creating Python app to call AI Platform model and make online predictions 
-### Last week: 
-- Deployed python app to Google App Engine
 ### This week: 
 - Creating a custom DataFlow template (vs. google-provided template via the console) 
 - helpful tutorials, docs, and starter code:
