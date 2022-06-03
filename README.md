@@ -7,7 +7,7 @@
 
 This project predicts medical charges from personal data such as age, smoker status, bmi, etc. using linear regression. 
 
-This could be useful for healthcare companies to forecast costs and assess premiums, or to provide patients greater insight into the most important factors influencing their charges and into their potential charges when planning HSA contributions. 
+This could be useful for healthcare companies to forecast costs and assess premiums for the year. It could also provide patients and healthcare companies greater insight into the most influential factors on these charges, which could inform the programs healthcare companies offer to patients to support and improve their health and reduce costs. Patients could also use these predictions when plgianning contributions to their HSA. 
 
 ### Architecture
 
